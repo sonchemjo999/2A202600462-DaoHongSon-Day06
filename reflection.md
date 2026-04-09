@@ -1,8 +1,8 @@
 # Individual Reflection — Đào Hồng Sơn (2A202600462)
 
 ## 1. Role (Vai trò)
-Head of engineering, solution architecture + investors
-Phát triển toàn bộ logic backend, sửa lỗi nghiêm trọng khiến app bị treo/crash.
+- Head of engineering, solution architecture + investors.
+- Phát triển toàn bộ logic backend, sửa lỗi nghiêm trọng khiến app bị treo/crash.
 
 ## 2. Phần phụ trách cụ thể
 - Thiết kế và triển khai toàn bộ hệ thống backend: Settings app, quản lý ngày giờ, âm thanh alarm, alarm service, các màn hình chính (Home, CrossCheck, Settings, Navigation).
