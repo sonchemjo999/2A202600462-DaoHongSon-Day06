@@ -1,11 +1,11 @@
 # Individual Reflection — Đào Hồng Sơn (2A202600462)
 
 ## 1. Role (Vai trò)
-Phát triển toàn bộ logic backend & kết nối dữ liệu giữa các màn hình; sửa lỗi nghiêm trọng khiến app bị treo/crash.
+Head of engineering, solution architecture + investors
+Phát triển toàn bộ logic backend, sửa lỗi nghiêm trọng khiến app bị treo/crash.
 
 ## 2. Phần phụ trách cụ thể
-- Sửa lỗi **app đơ sau khi quét đơn thuốc**: nguyên nhân là `MDDialog` button lambda capture biến `self._dialog` trước khi được gán → `None.dismiss()` crash. Đã viết lại `_show_dialog` và `_dialog_dismiss_then` đúng thứ tự khởi tạo → gắn callback.
-- Thiết kế và triển khai toàn bộ hệ thống backend: theme manager, cài đặt bền vững, quản lý ngày giờ, âm thanh alarm, alarm service, các màn hình chính (Home, CrossCheck, Settings, AI Scan, Navigation).
+- Thiết kế và triển khai toàn bộ hệ thống backend: Settings app, quản lý ngày giờ, âm thanh alarm, alarm service, các màn hình chính (Home, CrossCheck, Settings, Navigation).
 - Xây dựng shared store giữa các màn hình để CrossCheck ghi, Home và AlarmService đọc chung dữ liệu lịch thuốc.
 
 
@@ -23,6 +23,7 @@ Phát triển toàn bộ logic backend & kết nối dữ liệu giữa các mà
 - **Tái cấu trúc bảng màu tập trung** trong `main.py`: Chuyển toàn bộ màu sắc thành `ListProperty` (hơn 50 màu) gắn trực tiếp vào `MDApp`, giúp KV Language bind tự động khi đổi theme mà không cần reload widget. Mỗi nhóm màu có ý nghĩa rõ: nền, card thuốc (taken/normal/unlocked), chữ, trạng thái, nút, alarm popup, chatbot bubble, crosscheck form, settings, header home, search bar, điểm thưởng/streak.
 - **Tách `ThemeManager`** thành module riêng (`theme_manager.py`) — singleton `EventDispatcher` quản lý trạng thái Light/Dark. Khi theme đổi → dispatch event → `_on_theme_changed` trong `MDApp` cập nhật cả `theme_cls.theme_style` lẫn toàn bộ `ListProperty` màu sắc.
 - **`AppColors` class** với ~30 method tĩnh trả về màu theo chế độ Light/Dark, bao phủ mọi nhóm UI (background, surface, card, text, status, button, alarm, chatbot, crosscheck).
+- Sửa lỗi **app đơ sau khi quét đơn thuốc**: nguyên nhân là `MDDialog` button lambda capture biến `self._dialog` trước khi được gán → `None.dismiss()` crash. Đã viết lại `_show_dialog` và `_dialog_dismiss_then` đúng thứ tự khởi tạo → gắn callback.
 
 ### 4.3. Lưu trữ cài đặt
 - **`app_settings.py`** — lưu trữ JSON vào file `.app_settings.json` cùng thư mục `main.py`, có `fsync` để Windows đảm bảo ghi đĩa. Hỗ trợ: Dark Mode, âm thanh báo thức, rung, chọn file chuông. Mỗi lần chạy app đều đọc lại → cài đặt không bị mất khi tắt/mở app.
